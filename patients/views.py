@@ -17,6 +17,8 @@ def register(request):
         user: Patient = Patient.objects.filter(phone_number=phone_number)
         if user:
             user_message = 'This phone number is busy'
+        elif password1 != password:
+            password_message = 'Please make sure the password fields is same!'
         else:
             user = Patient.objects.create(
                 first_name=first_name,
@@ -28,3 +30,11 @@ def register(request):
             user.set_password(password)
             user.save()
             return redirect('home')
+    return render(
+        request=request,
+        template_name='auth/signup.html',
+        context={
+            'user_message': user_message,
+            'password_message': password_message
+        }
+    )
