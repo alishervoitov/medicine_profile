@@ -16,6 +16,8 @@ def register(request):
         password1 = request.POST.get('password1', None)
         user: Patient = Patient.objects.filter(phone_number=phone_number)
         if user:
+            user_message = 'This phone number is busy'
+        else:
             user = Patient.objects.create(
                 first_name=first_name,
                 last_name=last_name,
