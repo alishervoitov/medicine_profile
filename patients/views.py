@@ -1,3 +1,5 @@
+from authentication.app import login
+from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 
 from patients.models import Patient
@@ -38,3 +40,16 @@ def register(request):
             'password_message': password_message
         }
     )
+
+def log_in(request):
+    if request.method == 'POST':
+        phone_number = request.POST.get('phone_number', None)
+        password = request.POST.get('password', None)
+        customer = authenticate(
+            phone_number=phone_number,
+            password=password
+        )
+        print(customer)
+        if customer:
+            login(request, customer)
+            return redirect('home')
