@@ -1,5 +1,4 @@
-from authentication.app import login
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from patients.models import Patient
@@ -53,3 +52,7 @@ def log_in(request):
         if customer:
             login(request, customer)
             return redirect('home')
+    return render(
+        request=request,
+        template_name='auth/signin.html'
+    )
