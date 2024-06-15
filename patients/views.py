@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from patients.models import Patient
@@ -56,3 +56,8 @@ def log_in(request):
         request=request,
         template_name='auth/signin.html'
     )
+
+def log_out(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('login')

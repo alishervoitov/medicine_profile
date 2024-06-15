@@ -15,15 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from patients.views import log_in, register
+from patients.views import log_in, register, log_out
 from django.conf.urls.static import static, settings
 
 urlpatterns = [
-    path('product/', include('product.urls')),
-    path('order/', include('order.urls')),
     path('login/', log_in, name='login'),
     path('register/', register, name='register'),
     path('admin/', admin.site.urls),
+    path('logout/', log_out, name='logout'),
 ]
 
 urlpatterns += static(
