@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from patients.models import Patient
+from patients.send_sms import send_sms
 
 
 def register(request):
@@ -30,7 +31,10 @@ def register(request):
             )
             user.set_password(password)
             user.save()
-            return redirect('home')
+            verification = Verification.code_generate(user)
+            send_sms(user.phone_number, f'{verification.code}\nBu sizning kirish kodingiz.Uni hech kimga aytmang')
+            login(request,user)
+            return redirect('verification')
     return render(
         request=request,
         template_name='auth/signup.html',
