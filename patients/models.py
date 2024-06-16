@@ -1,3 +1,5 @@
+from random import random
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -35,3 +37,18 @@ class Patient(AbstractUser):
             return self.last_name
         else:
             return self.phone_number
+
+class Verification(models.Model):
+    code = models.IntegerField(unique=True)
+    user = models.ForeignKey(Patient, on_delete=models.CASCADE)
+
+    @classmethod
+    def code_generate(cls, user):
+        new_code = random.randint(10000,100000)
+        while cls.objects.filter(code=new_code):
+            new_code = random.randint(10000, 100000)
+        obj = cls.objects.create(
+            code=new_code,
+            user=user
+        )
+        return obj

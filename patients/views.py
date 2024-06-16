@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-from patients.models import Patient
+from patients.models import Patient, Verification
 from patients.send_sms import send_sms
 
 
