@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from patients.views import log_in, register, log_out
+from patients.views import log_in, register, log_out, verification
 from django.conf.urls.static import static, settings
 
 urlpatterns = [
@@ -23,6 +23,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('admin/', admin.site.urls),
     path('logout/', log_out, name='logout'),
+    path('verification/', verification, name='verification'),
 ]
 
 urlpatterns += static(

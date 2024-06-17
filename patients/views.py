@@ -4,7 +4,24 @@ from django.shortcuts import render, redirect
 from patients.models import Patient, Verification
 from patients.send_sms import send_sms
 
-
+def verification(request):
+    if request.method == 'POST':
+        code = request.POST.get('code', None)
+        try:
+            if code:
+                verification = Verification.objects.get(code=code)
+                user = verification.user
+                user.is_verified = True
+                user.save()
+                return redirect('home')
+            else:
+                raise ValueError
+        except:
+            pass
+    return render(
+        request=request,
+        template_name='auth/verification.html'
+    )
 def register(request):
     print(request.POST)
     user_message: str = ''
