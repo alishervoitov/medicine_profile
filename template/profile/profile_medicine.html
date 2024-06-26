@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+<div class="card">
+	<div class="row no-gutters">
+		<aside class="col-md-6">
+<article class="gallery-wrap">
+	<div class="img-big-wrap">
+	   <a href="#"><img src="{{ product.imageURL }}"></a>
+	</div> <!-- img-big-wrap.// -->
+
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<main class="col-md-6 border-left">
+<article class="content-body">
+
+<h2 class="title">{{ user.first_name}} {{ user.last_name }}</h2>
+
+<h5>The date of birth: {{ user.birthday }}</h5>
+	<h5>The place of birth: {{ user.region }} </h5>
+	<h5>Sex: {{ user.gender}}</h5>
+
+
+
+<hr>
+	<div class="row">
+		<div class="item-option-select">
+<!--			<h6>Choose Color</h6>-->
+			<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+			  <label class="btn btn-light">
+			    <input type="radio" name="radio_color"> {{ user.weight}}
+			  </label>
+			  <label class="btn btn-light">
+			    <input type="radio" name="radio_color" > {{ user.height}}
+			  </label>
+			  </label>
+			</div>
+		</div>
+	</div>
+
+	<h5>Medical history:     <ul>
+        {% for history in medical_history %}
+            <li>{{ history.date }}: {{ history.description }}</li>
+        {% endfor %}
+    </ul> </h5> <!-- row.// -->
+	<h6>Flu   Started date: 10.05.2024  Finished date: 15.05.2024</h6>
+	<h6>Toothache Started date: 17.05.2024  Finished date: 19.05.2024</h6>
+</article> <!-- product-info-aside .// -->
+		</main> <!-- col.// -->
+	</div> <!-- row.// -->
+</div>
+
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
