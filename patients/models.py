@@ -57,6 +57,14 @@ class Patient(AbstractUser):
         else:
             return self.phone_number
 
+class MedicalHistory(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    diagnosis = models.CharField(max_length=100)
+    treatment = models.TextField()
+    date = models.DateField()
+
+    def __str__(self):
+        return f'{self.diagnosis} on {self.date}'
 
 class Verification(models.Model):
     code = models.IntegerField(unique=True)
